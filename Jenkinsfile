@@ -6,8 +6,8 @@ elifePipeline {
             checkout scm
         }
         stage 'Build images', {
-            sh 'docker build ./helm -t elifesciences/datahub-airflow'
-            image = DockerImage.elifesciences(this, 'datahub-airflow', 'latest')
+            sh 'docker build ./helm -t elifesciences/data-hub-airflow'
+            image = DockerImage.elifesciences(this, 'data-hub-airflow', 'latest')
         }
 
         stage 'Push images', {
