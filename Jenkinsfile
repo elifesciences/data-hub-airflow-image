@@ -6,7 +6,7 @@ elifePipeline {
             checkout scm
         }
         stage 'Build images', {
-            sh 'docker build -t elifesciences/data-hub-airflow'
+            sh 'docker build . -t elifesciences/data-hub-airflow'
             image = DockerImage.elifesciences(this, 'data-hub-airflow', 'latest')
         }
 
