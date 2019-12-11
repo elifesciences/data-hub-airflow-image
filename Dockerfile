@@ -8,3 +8,9 @@ RUN apt-get update -yqq \
     && pip install 'apache-airflow[google_auth]'
 
 USER airflow
+
+COPY --chown=airflow:airflow worker.sh ./
+RUN chmod +x worker.sh
+
+RUN mkdir -p $AIRFLOW_HOME/serve
+RUN ln -s $AIRFLOW_HOME/logs $AIRFLOW_HOME/serve/log
