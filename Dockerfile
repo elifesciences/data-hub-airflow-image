@@ -1,7 +1,9 @@
 FROM puckel/docker-airflow
+ARG GIT_REPO_DIR
+
 #dockerfile for airflow image with dask and distributed installed
 # Install dependencies
-# It's more efficient to do pip install here than adding a requirements.txt
+
 USER root
 RUN apt-get update -yqq \
     && pip install dask distributed \
@@ -9,8 +11,15 @@ RUN apt-get update -yqq \
 
 USER airflow
 
-COPY --chown=airflow:airflow worker.sh ./
+COPY --chown=airflow:airflow scripts/worker.sh ./
 RUN chmod +x worker.sh
+
+COPY --chown=airflow:airflow scripts/install_dag_in_docker.sh ./
+COPY --chown=airflow:airflow ${GIT_REPO_DIR} ./${GIT_REPO_DIR}
+
+RUN chmod +x install_dag_in_docker.sh
+
+RUN ./install_dag_in_docker.sh
 
 RUN mkdir -p $AIRFLOW_HOME/serve
 RUN ln -s $AIRFLOW_HOME/logs $AIRFLOW_HOME/serve/log

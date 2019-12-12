@@ -1,17 +1,23 @@
 elifePipeline {
-    def DockerImage image
 
     node('containers-jenkins-plugin') {
         stage 'Checkout', {
             checkout scm
+            commit = elifeGitRevision()
         }
-        stage 'Build images', {
-            sh 'docker build . -t elifesciences/data-hub-airflow'
-            image = DockerImage.elifesciences(this, 'data-hub-airflow', 'latest')
+        stage 'Build image', {
+            sh "make IMAGE_TAG=${commit} build-image"
+            sh "make IMAGE_TAG=${commit} push-image"
         }
+        elifeMainlineOnly {
+            stage 'Push image', {
+                sh "make IMAGE_TAG=${commit} build-image"
+                sh "make IMAGE_TAG=${commit} push-image"
+            }
 
-        stage 'Push images', {
-             latest = image.tag('latest').push()
+            stage 'Merge to master', {
+                elifeGitMoveToBranch commit, 'master'
+            }
         }
     }
 }
