@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 GIT_REPOS_DIR_NAME = 'git_repos'
-REPO_LIST_FILE = 'sample_repo_list'
+REPO_LIST_FILE = 'repo_list'
 IMAGE_REPO = 'elifesciences/data-hub-with-dags'
 TAG = 'ci'
 
