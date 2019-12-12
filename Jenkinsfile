@@ -1,6 +1,8 @@
 elifePipeline {
 
     node('containers-jenkins-plugin') {
+        def commit
+
         stage 'Checkout', {
             checkout scm
             commit = elifeGitRevision()
@@ -11,7 +13,6 @@ elifePipeline {
         }
         elifeMainlineOnly {
             stage 'Push image', {
-                sh "make IMAGE_TAG=${commit} build-image"
                 sh "make IMAGE_TAG=${commit} push-image"
             }
 
