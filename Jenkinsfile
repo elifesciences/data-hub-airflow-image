@@ -9,7 +9,6 @@ elifePipeline {
         }
         stage 'Build image', {
             sh "make TAG=${commit} build-image"
-            sh "make TAG=${commit} push-image"
         }
         elifeMainlineOnly {
             stage 'Push image', {
