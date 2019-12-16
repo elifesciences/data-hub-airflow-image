@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 GIT_REPOS_DIR_NAME = git_repos
-REPO_LIST_FILE = repo_list
+REPO_LIST_FILE = repo-list.json
 IMAGE_REPO = elifesciences/data-hub-with-dags
 IMAGE_TAG = develop
 UNSTABLE_IMAGE_SUFFIX =
