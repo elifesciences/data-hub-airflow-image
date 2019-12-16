@@ -10,10 +10,13 @@ fi
 
 rm -rf $MAIN_GIT_REPO_DIR\/*
 
-while IFS=, read -r git_repo ref directory
-do
-    git clone $git_repo "$MAIN_GIT_REPO_DIR/$directory"
-    cd "$MAIN_GIT_REPO_DIR/$directory"
-    git reset --hard $ref
+
+for row in $(jq -c '.[]' $REPO_FILE ); do
+    _jq() {
+     echo ${row} | jq -r ${1}
+    }
+  git clone $(_jq '.git_repo_url') "$MAIN_GIT_REPO_DIR/$(_jq '.clone_directory')"
+  cd "$MAIN_GIT_REPO_DIR/$(_jq '.clone_directory')"
+    git reset --hard $(_jq '.reference')
     cd ../../
-done < $REPO_FILE
+done

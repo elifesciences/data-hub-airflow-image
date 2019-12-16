@@ -8,16 +8,28 @@ elifePipeline {
             commit = elifeGitRevision()
         }
         stage 'Build image', {
-            sh "make TAG=${commit} build-image"
+            sh "make IMAGE_TAG=${commit} build-image"
         }
-        elifeMainlineOnly {
-            stage 'Push image', {
-                sh "make TAG=${commit} push-image"
-            }
 
+        elifeMainlineOnly {
             stage 'Merge to master', {
                 elifeGitMoveToBranch commit, 'master'
             }
+
+            stage 'Push image', {
+                sh "make IMAGE_TAG=${commit} UNSTABLE_IMAGE_SUFFIX=_unstable push-image"
+            }
+
         }
+
+        elifeTagOnly { tagName ->
+            def candidateVersion = tagName - "v"
+
+            stage 'Push release image', {
+                sh "make IMAGE_TAG=latest push-image"
+                sh "make IMAGE_TAG=candidateVersion push-image"
+            }
+        }
+
     }
 }

@@ -1,16 +1,15 @@
 FROM puckel/docker-airflow
 ARG GIT_REPO_DIR
 
-#dockerfile for airflow image with dask and distributed installed
-# Install dependencies
-
 USER root
-RUN apt-get update -yqq \
-    && pip install dask distributed \
-    && pip install 'apache-airflow[google_auth]'
+
+COPY requirements.root.txt ./requirements.root.txt
+RUN  pip install -r ./requirements.root.txt
 
 USER airflow
 
+COPY requirements.txt ./requirements.txt
+RUN  pip install -r ./requirements.txt --user
 COPY --chown=airflow:airflow scripts/worker.sh ./
 RUN chmod +x worker.sh
 
