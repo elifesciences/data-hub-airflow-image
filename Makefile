@@ -46,7 +46,7 @@ git-clone:
 build-image: git-clone
 	docker build  --build-arg GIT_REPO_DIR=$(GIT_REPOS_DIR_NAME) . -t $(IMAGE_REPO):$(IMAGE_TAG)
 
-push-image: build-image
+create-push-image: build-image
 	docker push  $(IMAGE_REPO):$(IMAGE_TAG)
 
 
@@ -57,7 +57,7 @@ clone-formula-repo:
 clone-reset-formula-repo-to-ref: clone-formula-repo
 	git -C $(FORMULA_REPO_DIR) reset --hard $(FORMULA_GIT_REPO_REF)
 
-deploy-image-to-k8s: push-image clone-reset-formula-repo-to-ref
+deploy-image-to-k8s: create-push-image clone-reset-formula-repo-to-ref
 	make -C $(FORMULA_REPO_DIR)  $(COMPOSED_MAKEFILE_ARG) deploy-chart
 	make clean
 
