@@ -13,6 +13,9 @@ elifePipeline {
                 sh 'vault.sh kv get -field credentials secret/containers/data-hub/gcp > credentials.json'
                 k8s_aws =  "a b c"
             }
+            catch (e) {
+
+            }
             finally {
                     sh 'echo > credentials.json'
             }
