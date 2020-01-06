@@ -49,7 +49,7 @@ def createK8sSecret(k8s_secret_name, k8s_secret_file_name, k8s_namespace, vault_
     def created_key
 
     try {
-        sh 'echo  ${vault_field} ${vault_field} > ${secret_file_name}'
+        sh 'echo  ${vault_field} ${vault_field} ${secret_file_name}'
         sh 'vault.sh kv get -field ${vault_field} ${vault_field} > ${secret_file_name}'
         created_key = k8s_secret_name
     }
