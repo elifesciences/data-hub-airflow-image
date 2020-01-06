@@ -61,7 +61,7 @@ def UpsertK8sSecret(k8s_secret_name, k8s_secret_file_name, k8s_namespace, vault_
     try {
         sh "echo  ${vault_field} ${vault_key} ${k8s_secret_file_name}"
         sh "vault.sh kv get -field ${vault_field} ${vault_key} > ${k8s_secret_file_name}"
-        sh "echo '{\"name\": \"George\",\"id\": 12,\"email\": \"george@domain.com\"}' |  jq -r . | jq --arg b64_content \"\$(cat ${k8s_secret_file_name} | base64)\" '.data[${k8s_secret_file_name}]=\$b64_content'"
+        sh "echo '{\"name\": \"George\",\"id\": 12,\"email\": \"george@domain.com\"}' |  jq -r . | jq --arg b64_content \"\$(cat ${k8s_secret_file_name} | base64)\" '.data[\"${k8s_secret_file_name}\"]=\$b64_content'"
 
         created_key = k8s_secret_name
     }
