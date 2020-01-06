@@ -10,7 +10,7 @@ elifePipeline {
         }
         stage 'Build image', {
             try {
-                sh 'vault.sh kv get -field credentials secret/containers/data-pipeline/gcp > credentials.json'
+                sh 'vault.sh kv get -field credentials secret/containers/data-hub/gcp > credentials.json'
                 k8s_aws =  "a b c"
             }
             finally {
