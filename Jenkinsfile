@@ -21,6 +21,7 @@ elifePipeline {
             }
 
             stage 'Deploy image to k8s staging', {
+                sh 'vault.sh kv get -field credentials secret/containers/data-hub/gcp > credentials.json'
                 sh "make IMAGE_TAG=${commit} DEPLOYMENT_ENV=staging IMAGE_SUFFIX=_unstable FORMULA_GIT_REPO_REF=f3e03f1 deploy-image-to-k8s"
             }
         }
