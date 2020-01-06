@@ -38,6 +38,10 @@ ifdef CREATED_GOOGLE_OAUTH_SECRET
 	COMPOSED_MAKEFILE_ARG := $(COMPOSED_MAKEFILE_ARG)  CREATED_GOOGLE_OAUTH_SECRET=$(CREATED_GOOGLE_OAUTH_SECRET)
 endif
 
+
+tst:
+	echo $(COMPOSED_MAKEFILE_ARG)
+
 # make targets for creting images
 git-clone:
 	chmod +x clone.sh

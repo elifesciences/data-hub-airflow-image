@@ -2,13 +2,21 @@ elifePipeline {
 
     node('containers-jenkins-plugin') {
         def commit
+        def k8s_aws
 
         stage 'Checkout', {
             checkout scm
             commit = elifeGitRevision()
         }
         stage 'Build image', {
-            sh 'vault.sh kv get -field credentials secret/containers/data-hub/gcp > credentials.json'
+            try {
+                sh 'vault.sh kv get -field credentials secret/containers/data-pipeline/gcp > credentials.json'
+                k8s_aws =  "a b c"
+            }
+            finally {
+                    sh 'echo > credentials.json'
+            }
+            sh "echo ${k8s_aws}"
             sh "make IMAGE_TAG=${commit} build-image"
         }
 
