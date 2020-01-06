@@ -50,8 +50,7 @@ def createK8sSecret(k8s_secret_name, k8s_secret_file_name, k8s_namespace, vault_
 
     try {
         sh "echo  ${vault_field} ${vault_field} ${k8s_secret_file_name}"
-        sh 'vault.sh kv get -field ${vault_field} ${vault_key} > ${k8s_secret_file_name}'
-        sh 'kubectl create secret generic ${k8s_secret_name} --from-file=${k8s_secret_file_name} --namespace ${k8s_namespace} --dry-run -o yaml |   kubectl apply -f -'
+
         created_key = k8s_secret_name
     }
     catch (e) {
