@@ -5,10 +5,10 @@ GIT_REPOS_DIR_NAME = git_repos
 REPO_LIST_FILE = repo-list.json
 IMAGE_REPO = elifesciences/data-hub-with-dags
 IMAGE_TAG = develop
-UNSTABLE_IMAGE_SUFFIX =
+IMAGE_SUFFIX =
 
-ifdef UNSTABLE_IMAGE_SUFFIX
-	IMAGE_REPO := $(IMAGE_REPO)$(UNSTABLE_IMAGE_SUFFIX)
+ifdef IMAGE_SUFFIX
+	IMAGE_REPO := $(IMAGE_REPO)$(IMAGE_SUFFIX)
 endif
 
 # variables used for deploying newly created image into k8s

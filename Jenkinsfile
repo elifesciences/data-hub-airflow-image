@@ -17,11 +17,11 @@ elifePipeline {
             }
 
             stage 'Push image', {
-                sh "make IMAGE_TAG=${commit} UNSTABLE_IMAGE_SUFFIX=_unstable push-image"
+                sh "make IMAGE_TAG=${commit} IMAGE_SUFFIX=_unstable push-image"
             }
 
             stage 'Deploy image to k8s staging', {
-                sh "make IMAGE_TAG=${commit} DEPLOYMENT_ENV=staging UNSTABLE_IMAGE_SUFFIX=_unstable FORMULA_GIT_REPO_REF=f3e03f1 deploy-image-to-k8s"
+                sh "make IMAGE_TAG=${commit} DEPLOYMENT_ENV=staging IMAGE_SUFFIX=_unstable FORMULA_GIT_REPO_REF=f3e03f1 deploy-image-to-k8s"
             }
         }
 
