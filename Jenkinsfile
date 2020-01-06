@@ -13,9 +13,8 @@ elifePipeline {
             commit = elifeGitRevision()
         }
         stage 'Build image', {
-                deployment_namespace = 'staging'
-                k8s_gcp = UpsertK8sSecret('gcp-credentials', 'credentials.json', deployment_namespace, 'credentials', 'secret/containers/data-pipeline/gcp')
-
+            deployment_namespace = 'staging'
+            k8s_gcp = UpsertK8sSecret('gcp-credentials', 'credentials.json', deployment_namespace, 'credentials', 'secret/containers/data-pipeline/gcp')
             sh "make IMAGE_TAG=${commit} build-image
         }
 
