@@ -22,6 +22,11 @@ elifePipeline {
             }
 
             stage 'Push image', {
+                deployment_namespace = 'staging'
+                k8s_gcp = UpsertK8sSecret('gcp-credentials', 'credentials.json', deployment_namespace, 'credentials', 'secret/containers/data-hub/gcp')
+                k8s_aws = UpsertK8sSecret('credentials', 'credentials', deployment_namespace, 'credentials', 'secret/containers/data-hub/aws')
+                k8s_google_auth = UpsertK8sSecret('google-auth', 'AIRFLOW__GOOGLE__CLIENT_ID', deployment_namespace, 'client_id', 'secret/containers/data-hub/google-auth')
+                k8s_google_auth = UpsertK8sSecret('google-auth', 'AIRFLOW__GOOGLE__CLIENT_SECRET', deployment_namespace, 'client_secret', 'secret/containers/data-hub/google-auth')
                 sh "make IMAGE_TAG=${commit} IMAGE_SUFFIX=_unstable push-image"
             }
 
