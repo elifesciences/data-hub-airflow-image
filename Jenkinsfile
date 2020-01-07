@@ -12,10 +12,15 @@ elifePipeline {
             commit = elifeGitRevision()
         }
 
+        stage 'Test trigger other ', {
+            build job: 'data-hub-k8s-deployment', parameters: [string(name: 'userFlag', value: "BASDSDSESD")]
+        }
+
         stage 'Test kubectl and helm ', {
             sh "kubectl get pods"
             sh "helm list"
         }
+
 
         stage 'Build image', {
             sh "make IMAGE_TAG=${commit} build-image"
