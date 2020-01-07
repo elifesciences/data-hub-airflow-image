@@ -12,9 +12,15 @@ elifePipeline {
             commit = elifeGitRevision()
         }
 
+        stage 'Test kubectl and helm ', {
+            sh "kubectl get pods"
+            sh "helm list"
+        }
+
         stage 'Build image', {
             sh "make IMAGE_TAG=${commit} build-image"
         }
+
 
         elifeMainlineOnly {
             stage 'Merge to master', {
