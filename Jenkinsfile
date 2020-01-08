@@ -6,6 +6,7 @@ elifePipeline {
         def image_tag = 'develop'
         def deployment_env = 'staging'
         def deployment_namespace = 'data-hub'
+        def deployment_formula_ci_pipeline = 'data-hub-k8s-deployment'
 
         stage 'Checkout', {
             checkout scm
@@ -16,9 +17,6 @@ elifePipeline {
             sh "make IMAGE_TAG=${commit} build-image"
         }
 
-        stage 'Deploy image to k8s staging', {
-            triggerDeployment(image_repo, image_tag, deployment_env, deployment_namespace)
-        }
         elifeMainlineOnly {
             def dev_image_repo = image_repo + '_unstable'
 
@@ -31,7 +29,7 @@ elifePipeline {
             }
 
             stage 'Deploy image to k8s staging', {
-                triggerDeployment(dev_image_repo, image_tag, deployment_env, deployment_namespace)
+                triggerDeployment(deployment_formula_ci_pipeline, dev_image_repo, image_tag, deployment_env, deployment_namespace)
             }
         }
 
@@ -45,7 +43,7 @@ elifePipeline {
             }
 
             stage 'Deploy image to k8s prod', {
-                triggerDeployment(image_repo, candidateVersion, deployment_env, deployment_namespace)
+                triggerDeployment(deployment_formula_ci_pipeline, image_repo, candidateVersion, deployment_env, deployment_namespace)
             }
         }
 
@@ -53,6 +51,6 @@ elifePipeline {
 }
 
 
-def triggerDeployment(image_repo, image_tag, deployment_env, deployment_namespace ){
-    build job: 'data-hub-k8s-deployment', wait: false, parameters: [string(name: 'imageRepo', value: image_repo), string(name: 'imageTag', value: image_tag), string(name: 'deploymentEnv', value: deployment_env), string(name: 'deploymentNamespace', value: deployment_namespace) ]
+def triggerDeployment(deployment_formula_ci_pipeline,image_repo, image_tag, deployment_env, deployment_namespace ){
+    build job: deployment_formula_ci_pipeline,  wait: false, parameters: [string(name: 'imageRepo', value: image_repo), string(name: 'imageTag', value: image_tag), string(name: 'deploymentEnv', value: deployment_env), string(name: 'deploymentNamespace', value: deployment_namespace) ]
 }
