@@ -6,7 +6,7 @@ elifePipeline {
         def image_tag = 'develop'
         def deployment_env = 'staging'
         def deployment_namespace = 'data-hub'
-        def deployment_formula_ci_pipeline = 'data-hub-k8s-deployment'
+        def deployment_formula_ci_pipeline = 'elife-data-hub-formula'
 
         stage 'Checkout', {
             checkout scm
