@@ -6,15 +6,12 @@ elifePipeline {
         def image_tag = 'develop'
         def deployment_env = 'staging'
         def deployment_namespace = 'data-hub'
+        def dev_image_repo = image_repo + '_unstable'
 
         stage 'Checkout', {
             checkout scm
             commit = elifeGitRevision()
         }
-
-
-        def dev_image_repo = image_repo + '_unstable'
-
 
 
 
