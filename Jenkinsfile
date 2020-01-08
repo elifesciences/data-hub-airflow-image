@@ -12,23 +12,12 @@ elifePipeline {
             commit = elifeGitRevision()
         }
 
-        stage 'Build image', {
-            sh "make IMAGE_TAG=${commit} build-image"
-        }
 
-        def dev_image_repo = image_repo + '_unstable'
-
-        stage 'Merge to master', {
-            elifeGitMoveToBranch commit, 'master'
-        }
-
-        stage 'Push image', {
-            sh "make IMAGE_TAG=${commit} IMAGE_REPO=${dev_image_repo} push-image"
-        }
 
         stage 'Deploy image to k8s staging', {
             triggerDeployment(dev_image_repo, image_tag, deployment_env, deployment_namespace)
         }
+
 
         elifeTagOnly { tagName ->
             def candidateVersion = tagName - "v"
@@ -39,7 +28,7 @@ elifePipeline {
                 sh "make IMAGE_TAG=candidateVersion IMAGE_REPO=${image_repo}  push-image"
             }
 
-            stage 'Deploy image to k8s staging', {
+            stage 'Deploy image to k8s prod', {
                 triggerDeployment(image_repo, candidateVersion, deployment_env, deployment_namespace)
             }
         }
