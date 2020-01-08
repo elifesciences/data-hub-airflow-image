@@ -6,20 +6,35 @@ elifePipeline {
         def image_tag = 'develop'
         def deployment_env = 'staging'
         def deployment_namespace = 'data-hub'
-        def dev_image_repo = image_repo + '_unstable'
 
         stage 'Checkout', {
             checkout scm
             commit = elifeGitRevision()
         }
 
+        stage 'Build image', {
+            sh "make IMAGE_TAG=${commit} build-image"
+        }
 
-
-
+        def dev_image_repo = image_repo + '_unstable'
         stage 'Deploy image to k8s staging', {
             triggerDeployment(dev_image_repo, image_tag, deployment_env, deployment_namespace)
         }
+        elifeMainlineOnly {
+            def dev_image_repo = image_repo + '_unstable'
 
+            stage 'Merge to master', {
+                elifeGitMoveToBranch commit, 'master'
+            }
+
+            stage 'Push image', {
+                sh "make IMAGE_TAG=${commit} IMAGE_REPO=${dev_image_repo} push-image"
+            }
+
+            stage 'Deploy image to k8s staging', {
+                triggerDeployment(dev_image_repo, image_tag, deployment_env, deployment_namespace)
+            }
+        }
 
         elifeTagOnly { tagName ->
             def candidateVersion = tagName - "v"
