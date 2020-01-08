@@ -16,9 +16,8 @@ elifePipeline {
             sh "make IMAGE_TAG=${commit} build-image"
         }
 
-        def dev_image_repo = image_repo + '_unstable'
         stage 'Deploy image to k8s staging', {
-            triggerDeployment(dev_image_repo, image_tag, deployment_env, deployment_namespace)
+            triggerDeployment(image_repo, image_tag, deployment_env, deployment_namespace)
         }
         elifeMainlineOnly {
             def dev_image_repo = image_repo + '_unstable'
