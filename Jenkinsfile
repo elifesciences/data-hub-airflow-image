@@ -17,6 +17,12 @@ elifePipeline {
             sh "make IMAGE_TAG=${commit} build-image"
         }
 
+        def dev_image_repo = image_repo + '_unstable'
+
+        stage 'Push image', {
+            sh "make IMAGE_TAG=${commit} IMAGE_REPO=${dev_image_repo} push-image"
+        }
+
         elifeMainlineOnly {
             def dev_image_repo = image_repo + '_unstable'
 
