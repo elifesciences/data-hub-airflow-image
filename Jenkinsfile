@@ -21,7 +21,7 @@ elifePipeline {
 
 
         stage 'Push image', {
-            sh "make IMAGE_TAG=${commit} IMAGE_REPO=${dev_image_repoc} push-image"
+            sh "make IMAGE_TAG=${commit} IMAGE_REPO=${dev_image_repoc} create-push-image"
         }
 
         elifeMainlineOnly {
@@ -32,7 +32,7 @@ elifePipeline {
             }
 
             stage 'Push image', {
-                sh "make IMAGE_TAG=${commit} IMAGE_REPO=${dev_image_repo} push-image"
+                sh "make IMAGE_TAG=${commit} IMAGE_REPO=${dev_image_repo} create-push-image"
             }
 
             stage 'Deploy image to k8s staging', {
@@ -45,8 +45,8 @@ elifePipeline {
             deployment_env = 'prod'
 
             stage 'Push release image', {
-                sh "make IMAGE_TAG=latest  IMAGE_REPO=${image_repo}  push-image"
-                sh "make IMAGE_TAG=candidateVersion IMAGE_REPO=${image_repo}  push-image"
+                sh "make IMAGE_TAG=latest  IMAGE_REPO=${image_repo}  create-push-image"
+                sh "make IMAGE_TAG=candidateVersion IMAGE_REPO=${image_repo}  create-push-image"
             }
 
             stage 'Deploy image to k8s prod', {
