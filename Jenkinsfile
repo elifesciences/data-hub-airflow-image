@@ -7,7 +7,7 @@ elifePipeline {
         def deployment_env = 'staging'
         def deployment_namespace = 'data-hub'
         def deployment_formula_ci_pipeline = 'elife-data-hub-formula'
-        def dev_image_repo = image_repo + '_unstable'
+        def dev_image_repoc = image_repo + '_unstable'
 
         stage 'Checkout', {
             checkout scm
@@ -21,7 +21,7 @@ elifePipeline {
 
 
         stage 'Push image', {
-            sh "make IMAGE_TAG=${commit} IMAGE_REPO=${dev_image_repo} push-image"
+            sh "make IMAGE_TAG=${commit} IMAGE_REPO=${dev_image_repoc} push-image"
         }
 
         elifeMainlineOnly {
