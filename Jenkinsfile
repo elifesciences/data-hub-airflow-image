@@ -3,7 +3,6 @@ elifePipeline {
     node('containers-jenkins-plugin') {
         def commit
         def image_repo = 'elifesciences/data-hub-with-dags'
-        def image_tag = 'develop'
         def deployment_env = 'staging'
         def deployment_namespace = 'data-hub'
         def deployment_formula_ci_pipeline = 'elife-data-hub-formula'
@@ -29,7 +28,7 @@ elifePipeline {
             }
 
             stage 'Deploy image to k8s staging', {
-                triggerDeployment(deployment_formula_ci_pipeline, dev_image_repo, image_tag, deployment_env, deployment_namespace)
+                triggerDeployment(deployment_formula_ci_pipeline, dev_image_repo, commit , deployment_env, deployment_namespace)
             }
         }
 
