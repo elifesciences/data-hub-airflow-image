@@ -2,7 +2,7 @@
 
 # variables for creating docker image
 GIT_REPOS_DIR_NAME = git_repos
-REPO_LIST_FILE = unstable-image-repo-list.json
+REPO_LIST_FILE = repo-list.json
 IMAGE_REPO = elifesciences/data-hub-with-dags
 IMAGE_TAG = develop
 
