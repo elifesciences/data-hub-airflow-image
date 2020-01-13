@@ -6,6 +6,11 @@ elifePipeline {
         def deployment_env = 'staging'
         def deployment_namespace = 'data-hub'
         def deployment_formula_ci_pipeline = 'elife-data-hub-formula'
+        def modify_repo_list_external_trigger = false
+        def git_branch_for_modifying_repo_list = 'develop'
+        def gitUrl
+        def gitRef
+
 
         stage 'Checkout', {
             checkout scm
@@ -16,19 +21,31 @@ elifePipeline {
             sh "make IMAGE_TAG=${commit} build-image"
         }
 
+        stage 'Set repo list update variable values', {
+            modify_repo_list_external_trigger = (params.gitUrl == null || params.gitRef == null) ? false : true
+            gitUrl = params.gitUrl
+            gitRef = params.gitRef
+        }
+
         elifeMainlineOnly {
-            def dev_image_repo = image_repo + '_unstable'
+            if (modify_repo_list_external_trigger){
+                stage 'Modify Repo List', {
+                    sh 'make BRANCH_TO_UPDATE=${git_branch_for_modifying_repo_list} GIT_URL_TO_UPDATE=${gitUrl} NEW_GIT_URL_REF=${gitRef}  git-push-updated-repo-list'
+                }
+            } else {
+                def dev_image_repo = image_repo + '_unstable'
 
-            stage 'Merge to master', {
-                elifeGitMoveToBranch commit, 'master'
-            }
+                stage 'Merge to master', {
+                    elifeGitMoveToBranch commit, 'master'
+                }
 
-            stage 'Push image', {
-                sh "make IMAGE_TAG=${commit} IMAGE_REPO=${dev_image_repo} create-push-image"
-            }
+                stage 'Push image', {
+                    sh "make IMAGE_TAG=${commit} IMAGE_REPO=${dev_image_repo} create-push-image"
+                }
 
-            stage 'Deploy image to k8s staging', {
-                triggerDeployment(deployment_formula_ci_pipeline, dev_image_repo, commit , deployment_env, deployment_namespace)
+                stage 'Deploy image to k8s staging', {
+                    triggerDeployment(deployment_formula_ci_pipeline, dev_image_repo, commit , deployment_env, deployment_namespace)
+                }
             }
         }
 
