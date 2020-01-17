@@ -1,5 +1,10 @@
 [
   {
+    "git_repo_url":"git@github.com:elifesciences/data-hub-core-airflow-dags.git",
+    "reference": "c989c86",
+    "clone_directory": "core_dag"
+  },
+  {
     "git_repo_url":"git@github.com:elifesciences/peerscout-dags.git",
     "reference":"b93b625",
     "clone_directory":"peerscout_dag"
