@@ -9,7 +9,7 @@ elifePipeline {
         def modify_repo_list_external_trigger = false
         def git_branch_for_modifying_repo_list = 'develop'
         def gitUrl
-        def gitRef
+        def gitCommitRef
 
 
         stage 'Checkout', {
@@ -22,15 +22,15 @@ elifePipeline {
         }
 
         stage 'Set repo list update variable values', {
-            modify_repo_list_external_trigger = (params.gitUrl == null || params.gitRef == null) ? false : true
+            modify_repo_list_external_trigger = (params.gitUrl == null || params.gitCommitRef == null) ? false : true
             gitUrl = params.gitUrl
-            gitRef = params.gitRef
+            gitCommitRef = params.gitCommitRef
         }
 
         elifeMainlineOnly {
             if (modify_repo_list_external_trigger){
                 stage 'Modify Repo List', {
-                    sh 'make BRANCH_TO_UPDATE=${git_branch_for_modifying_repo_list} GIT_URL_TO_UPDATE=${gitUrl} NEW_GIT_URL_REF=${gitRef}  git-push-updated-repo-list'
+                    sh 'make BRANCH_TO_UPDATE=${git_branch_for_modifying_repo_list} GIT_URL_TO_UPDATE=${gitUrl} NEW_GIT_URL_REF=${gitCommitRef}  git-push-updated-repo-list'
                 }
             } else {
                 def dev_image_repo = image_repo + '_unstable'

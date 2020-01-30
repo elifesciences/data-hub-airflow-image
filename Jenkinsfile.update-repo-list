@@ -1,0 +1,22 @@
+elifePipeline {
+
+    node('containers-jenkins-plugin') {
+        def git_branch_for_modifying_repo_list = 'develop'
+        def gitUrl
+        def gitCommitRef
+
+        stage 'Checkout', {
+            checkout scm
+        }
+
+        stage 'Set repo list update variable values', {
+            gitUrl = params.gitUrl
+            gitCommitRef = params.gitCommitRef
+        }
+
+        stage 'Modify Repo List', {
+            sh 'make BRANCH_TO_UPDATE=${git_branch_for_modifying_repo_list} GIT_URL_TO_UPDATE=${gitUrl} NEW_GIT_URL_REF=${gitCommitRef}  git-push-updated-repo-list'
+        }
+
+    }
+}
