@@ -7,6 +7,7 @@ elifePipeline {
         def deployment_namespace = 'data-hub'
         def deployment_formula_ci_pipeline = 'elife-data-hub-formula'
 
+
         stage 'Checkout', {
             checkout scm
             commit = elifeGitRevision()
@@ -17,6 +18,7 @@ elifePipeline {
         }
 
         elifeMainlineOnly {
+
             def dev_image_repo = image_repo + '_unstable'
 
             stage 'Merge to master', {
@@ -30,6 +32,7 @@ elifePipeline {
             stage 'Deploy image to k8s staging', {
                 triggerDeployment(deployment_formula_ci_pipeline, dev_image_repo, commit , deployment_env, deployment_namespace)
             }
+
         }
 
         elifeTagOnly { tagName ->
