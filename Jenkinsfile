@@ -55,7 +55,7 @@ elifePipeline {
 
             stage 'Push release image', {
                 sh "make IMAGE_TAG=latest  IMAGE_REPO=${image_repo}  create-push-image"
-                sh "make IMAGE_TAG=candidateVersion IMAGE_REPO=${image_repo}  create-push-image"
+                sh "make IMAGE_TAG=${candidateVersion} IMAGE_REPO=${image_repo}  create-push-image"
             }
 
             stage 'Deploy image to k8s prod', {
