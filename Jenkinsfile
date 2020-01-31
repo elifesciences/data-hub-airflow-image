@@ -27,6 +27,7 @@ elifePipeline {
 
             stage 'Push image', {
                 sh "make IMAGE_TAG=${commit} IMAGE_REPO=${dev_image_repo} create-push-image"
+                sh "make IMAGE_TAG=latest IMAGE_REPO=${dev_image_repo} create-push-image"
             }
 
             stage 'Deploy image to k8s staging', {
