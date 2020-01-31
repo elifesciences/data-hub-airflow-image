@@ -1,1 +1,1 @@
-[{"git_repo_url":"git@github.com:elifesciences/data-hub-core-airflow-dags.git","reference":"7a4dd70","clone_directory":"core_dag"},{"git_repo_url":"git@github.com:elifesciences/peerscout-dags.git","reference":"f566bbd","clone_directory":"peerscout_dag"}]
+[{"git_repo_url":"git@github.com:elifesciences/data-hub-core-airflow-dags.git","reference":"7a4dd70","clone_directory":"core_dag"},{"git_repo_url":"git@github.com:elifesciences/peerscout-dags.git","reference":"1d27ed03831b1c204b971db61fc20d64800e8222","clone_directory":"peerscout_dag"}]
