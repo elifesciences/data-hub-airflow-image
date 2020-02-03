@@ -25,7 +25,6 @@ update-repo-list: git-checkout-branch
 
 git-repo-list-update-commit: update-repo-list
 	cat $(REPO_LIST_FILE) 
-	git commit -m "Updated commit ref of $(GIT_URL_TO_UPDATE) to $(NEW_GIT_URL_REF)" $(REPO_LIST_FILE)
 
 git-push-updated-repo-list: git-repo-list-update-commit
 	cat $(REPO_LIST_FILE) 
