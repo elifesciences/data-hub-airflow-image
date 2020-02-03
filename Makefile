@@ -18,15 +18,18 @@ COMPOSED_MAKEFILE_ARG = DEPLOYMENT_ENV=$(DEPLOYMENT_ENV)  DEPLOYMENT_NAMESPACE=$
 git-checkout-branch: 
 	git checkout $(BRANCH_TO_UPDATE)
 	git pull
+	git ls-files -m
 
 # update repo list file with new ref
 update-repo-list: git-checkout-branch
 	echo $$( FILECONTENT=$$(cat $(REPO_LIST_FILE) | jq  --arg giturl $(GIT_URL_TO_UPDATE)  --arg ref  $(NEW_GIT_URL_REF) -c '. | map( if .git_repo_url == $$giturl then .reference|= $$ref else . end) ') && echo $${FILECONTENT} > $(REPO_LIST_FILE)  )
 
 git-repo-list-update-commit: update-repo-list
+	git ls-files -m
 	git commit -m "Updated Ref of $(GIT_URL_TO_UPDATE) to $(NEW_GIT_URL_REF)" $(REPO_LIST_FILE)
 
 git-push-updated-repo-list: git-repo-list-update-commit
+	git ls-files -m
 	git push origin $(BRANCH_TO_UPDATE)
 
 
