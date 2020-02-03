@@ -17,6 +17,7 @@ COMPOSED_MAKEFILE_ARG = DEPLOYMENT_ENV=$(DEPLOYMENT_ENV)  DEPLOYMENT_NAMESPACE=$
 # checkout branch
 git-checkout-branch: 
 	git checkout $(BRANCH_TO_UPDATE)
+	git pull
 
 # update repo list file with new ref
 update-repo-list: git-checkout-branch
