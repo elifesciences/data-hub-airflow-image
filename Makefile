@@ -5,6 +5,8 @@ GIT_REPOS_DIR_NAME = git_repos
 REPO_LIST_FILE = repo-list.json
 IMAGE_REPO = elifesciences/data-hub-with-dags
 IMAGE_TAG = develop
+EXISTING_IMAGE_REPO =
+EXISTING_IMAGE_TAG =
 
 BRANCH_TO_UPDATE =
 GIT_URL_TO_UPDATE =
@@ -40,6 +42,11 @@ build-image: git-clone
 
 create-push-image: build-image
 	docker push  $(IMAGE_REPO):$(IMAGE_TAG)
+
+retag-push-image:
+	docker tag  $(EXISTING_IMAGE_REPO):$(EXISTING_IMAGE_TAG) $(IMAGE_REPO):$(IMAGE_TAG)
+	docker push  $(IMAGE_REPO):$(IMAGE_TAG)
+
 
 clean:
 	rm -rf $(GIT_REPOS_DIR_NAME)
