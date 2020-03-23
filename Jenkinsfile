@@ -7,7 +7,6 @@ elifePipeline {
         def deployment_namespace = 'data-hub'
         def deployment_formula_ci_pipeline = 'elife-data-hub-formula'
 
-
         stage 'Checkout', {
             checkout scm
             commit = elifeGitRevision()
