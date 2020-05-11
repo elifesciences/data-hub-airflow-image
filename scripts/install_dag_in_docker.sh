@@ -4,7 +4,7 @@ set -e
 
 DAGS_PATH=$AIRFLOW_HOME/dags
 REPOS_DIR=$AIRFLOW_HOME/git_repos
-APP_FILES_DIR=$AIRFLOW_HOME/applications_file_directory
+APP_FILES_DIR=$AIRFLOW_HOME/data_pipeline_files
 
 if [ ! -d $DAGS_PATH ]; then
   mkdir -p $DAGS_PATH
