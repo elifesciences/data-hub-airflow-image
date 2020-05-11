@@ -10,8 +10,8 @@ if [ ! -d $DAGS_PATH ]; then
   mkdir -p $DAGS_PATH
 fi
 
-if [ ! -d APP_FILES_DIR ]; then
-  mkdir -p APP_FILES_DIR
+if [ ! -d $APP_FILES_DIR ]; then
+  mkdir -p $APP_FILES_DIR
 fi
 
 cd $REPOS_DIR
