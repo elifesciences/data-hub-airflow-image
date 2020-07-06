@@ -3,6 +3,10 @@ ARG GIT_REPO_DIR
 
 USER root
 
+RUN apt-get update \
+  && apt-get install pkg-config libicu-dev -yqq \
+  && rm -rf /var/lib/apt/lists/*
+
 COPY requirements.root.txt ./requirements.root.txt
 RUN  pip install -r ./requirements.root.txt
 
