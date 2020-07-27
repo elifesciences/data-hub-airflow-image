@@ -1,2 +1,2 @@
-dask[complete]==2.8.1
-distributed==2.8.1
+dask[complete]==2.21.0
+distributed==2.21.0
