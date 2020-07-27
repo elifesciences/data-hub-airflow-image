@@ -1,7 +1,8 @@
 # eLife's Data Hub  Airflow Image
 Create custom airflow image which is deployed in K8s and used for running data hub data pipelines.
 The image created contains a set of airflow dag which are installed in the image after their git repos (listed in the `repo-list.json`) are cloned and copied into the docker image.
-#### How the image is created
+
+## How the image is created
 The `clone.sh` clones each of the git repos specified in the `repo-list.json` file into the directory specified for the particular repo 
 in the `repo-list.json`.
 During the image build, 
