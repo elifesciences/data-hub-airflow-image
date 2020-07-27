@@ -16,7 +16,7 @@ During the image build,
  - The `scripts/worker.sh` is used to create web server  that can be used to serve log files created by airflow task execution workers.
  This should be run when the worker pod/docker container is created
  
- #### CI/CD
+ ## CI/CD
 Points to note:
 - Every merge to the dev creates and pushes an image to the docker hub. 
 - It also triggers another CI pipeline that re-deploys the running data-hub application in the staging environment using this latest created image
