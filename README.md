@@ -20,4 +20,4 @@ Points to note:
 - Every merge to the dev creates and pushes an image to the docker hub. 
 - It also triggers another CI pipeline that re-deploys the running data-hub application in the staging environment using this latest created image
 - To create and deploy an image into data hub production environment, create a release of the github repo.
-- The git commit ref for each of the repo in the repo list is typically updated by another CI pipeline which is expected to be invoked whenever there is a merge to dev in each of the  data pipelines git repos.
+- The git commit ref for each of the repo in the repo list is typically updated by another CI pipeline which is expected to be invoked whenever there is a merge to `develop` branch in each of the  data pipelines git repos.
