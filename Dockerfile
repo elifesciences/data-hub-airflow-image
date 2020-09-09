@@ -7,13 +7,16 @@ RUN apt-get update \
   && apt-get install pkg-config libicu-dev -yqq \
   && rm -rf /var/lib/apt/lists/*
 
+COPY requirements.build.txt ./requirements.build.txt
+RUN  pip install --disable-pip-version-check -r ./requirements.build.txt
+
 COPY requirements.root.txt ./requirements.root.txt
-RUN  pip install -r ./requirements.root.txt
+RUN  pip install --disable-pip-version-check -r ./requirements.root.txt
 
 USER airflow
 
 COPY requirements.txt ./requirements.txt
-RUN  pip install -r ./requirements.txt --user
+RUN  pip install --disable-pip-version-check -r ./requirements.txt --user
 COPY --chown=airflow:airflow scripts/worker.sh ./
 RUN chmod +x worker.sh
 
