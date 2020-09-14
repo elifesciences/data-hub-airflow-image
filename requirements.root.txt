@@ -1,2 +1,2 @@
 dask[complete]==2.26.0
-distributed==2.25.0
+distributed==2.26.0
