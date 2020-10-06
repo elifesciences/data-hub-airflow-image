@@ -26,9 +26,9 @@ update-repo-list-only:
 	echo $$( \
 			FILECONTENT=$$( \
 				cat $(REPO_LIST_FILE) \
-					| jq  --arg giturl $(GIT_URL_TO_UPDATE)  --arg ref  $(NEW_GIT_URL_REF) -c \
+					| jq  --arg giturl $(GIT_URL_TO_UPDATE)  --arg ref  $(NEW_GIT_URL_REF) \
 						'. | map(if .git_repo_url == $$giturl then .reference|= $$ref else . end) ' \
-			) && echo $${FILECONTENT} \
+			) && echo "$${FILECONTENT}" \
 			> $(REPO_LIST_FILE) \
 		)
 
