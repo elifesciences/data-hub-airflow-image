@@ -11,7 +11,7 @@
   },
   {
     "git_repo_url": "git@github.com:elifesciences/data-hub-ejp-xml-pipeline.git",
-    "reference": "2470c265763e8837b776ebda5aeb7d9489be2557",
+    "reference": "8ed3434ed2424a2c04fe417136daeaee2e6810e5",
     "clone_directory": "ejp_xml_dag"
   },
   {
