@@ -4,7 +4,7 @@ ARG GIT_REPO_DIR
 USER root
 
 RUN apt-get update \
-  && apt-get install pkg-config libicu-dev gcc -yqq \
+  && apt-get install pkg-config libicu-dev gcc g++ -yqq \
   && rm -rf /var/lib/apt/lists/*
 
 USER airflow
@@ -22,7 +22,7 @@ COPY --chown=airflow:airflow ${GIT_REPO_DIR} ./${GIT_REPO_DIR}
 
 RUN chmod +x install_dag_in_docker.sh
 
-RUN ./install_dag_in_docker.sh
+#RUN ./install_dag_in_docker.sh
 
 RUN mkdir -p $AIRFLOW_HOME/serve
 RUN ln -s $AIRFLOW_HOME/logs $AIRFLOW_HOME/serve/log
