@@ -4,7 +4,7 @@ ARG GIT_REPO_DIR
 USER root
 
 RUN apt-get update \
-  && apt-get install pkg-config libicu-dev -yqq \
+  && apt-get install pkg-config libicu-dev gcc -yqq \
   && rm -rf /var/lib/apt/lists/*
 
 USER airflow
