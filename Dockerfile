@@ -1,19 +1,16 @@
-FROM puckel/docker-airflow
+FROM apache/airflow:1.10.13-python3.6
 ARG GIT_REPO_DIR
 
 USER root
 
 RUN apt-get update \
-  && apt-get install pkg-config libicu-dev -yqq \
+  && apt-get install pkg-config libicu-dev gcc g++ -yqq \
   && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.build.txt ./requirements.build.txt
-RUN  pip install --disable-pip-version-check -r ./requirements.build.txt
-
-COPY requirements.root.txt ./requirements.root.txt
-RUN  pip install --disable-pip-version-check -r ./requirements.root.txt
-
 USER airflow
+
+COPY requirements.build.txt ./requirements.build.txt
+RUN  pip install --disable-pip-version-check -r ./requirements.build.txt --user
 
 COPY requirements.txt ./requirements.txt
 RUN  pip install --disable-pip-version-check -r ./requirements.txt --user
