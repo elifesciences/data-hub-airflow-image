@@ -37,7 +37,7 @@ update-repo-list: \
 	update-repo-list-only
 
 git-repo-list-update-commit: update-repo-list
-	git commit -m "Updated Ref of $(GIT_URL_TO_UPDATE) to $(NEW_GIT_URL_REF)" $(REPO_LIST_FILE)
+	git commit --allow-empty -m "Updated Ref of $(GIT_URL_TO_UPDATE) to $(NEW_GIT_URL_REF)" $(REPO_LIST_FILE)
 
 git-push-updated-repo-list: git-repo-list-update-commit
 	git push origin $(BRANCH_TO_UPDATE)
