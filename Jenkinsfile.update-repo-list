@@ -16,7 +16,7 @@ elifePipeline {
         }
 
         stage 'Checking if the Repo List file Changed', {
-            isRepoListChanged = sh(script: "make check-repo-list-file-change", returnStdout: true).trim()
+            isRepoListChanged = sh(script: "make -s check-repo-list-file-change", returnStdout: true).trim()
         }
 
         stage 'Modify Repo List', {
