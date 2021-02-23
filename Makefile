@@ -37,8 +37,11 @@ update-repo-list: \
 	update-repo-list-only
 
 # to commit whether some changes
+check-repo-list-file-change:
+	git diff HEAD -- $(REPO_LIST_FILE)
+
 git-repo-list-update-commit: update-repo-list
-	git diff --quiet HEAD -- || git commit -m "Updated Ref of $(GIT_URL_TO_UPDATE) to $(NEW_GIT_URL_REF)" $(REPO_LIST_FILE)
+	git commit -m "Updated Ref of $(GIT_URL_TO_UPDATE) to $(NEW_GIT_URL_REF)" $(REPO_LIST_FILE)
 
 git-push-updated-repo-list: git-repo-list-update-commit
 	git push origin $(BRANCH_TO_UPDATE)

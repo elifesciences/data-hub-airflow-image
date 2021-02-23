@@ -4,6 +4,7 @@ elifePipeline {
         def git_branch_for_modifying_repo_list = 'develop'
         def gitUrl
         def gitCommitRef
+        def isRepoListChanged
 
         stage 'Checkout', {
             checkout scm
@@ -14,8 +15,16 @@ elifePipeline {
             gitCommitRef = params.gitCommitRef
         }
 
+        stage 'Checking if the Repo List file Changed', {
+            isRepoListChanged = sh(script: "make check-repo-list-file-change", returnStdout: true).trim()
+        }
+
         stage 'Modify Repo List', {
-            sh "make BRANCH_TO_UPDATE=${git_branch_for_modifying_repo_list} GIT_URL_TO_UPDATE=${gitUrl} NEW_GIT_URL_REF=${gitCommitRef}  git-push-updated-repo-list"
+            if ( isRepoListChanged != '') {
+                sh "make BRANCH_TO_UPDATE=${git_branch_for_modifying_repo_list} GIT_URL_TO_UPDATE=${gitUrl} NEW_GIT_URL_REF=${gitCommitRef}  git-push-updated-repo-list"
+            } else {
+                echo "nothing to commit, working tree clean"
+            }
         }
 
     }
