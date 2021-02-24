@@ -37,12 +37,12 @@ update-repo-list: \
 	update-repo-list-only
 
 git-repo-list-update-commit:
-	echo "committing changes..."
+	@echo "committing changes..."
 	git commit -m "Updated Ref of $(GIT_URL_TO_UPDATE) to $(NEW_GIT_URL_REF)" $(REPO_LIST_FILE)
 
 git-repo-list-commit-if-changed: update-repo-list
 	@if [ -z "$$(git diff HEAD -- $(REPO_LIST_FILE))" ]; then \
-		@echo "nothing to commit, working tree clean"; \
+		echo "nothing to commit, working tree clean"; \
 	else \
 		$(MAKE) git-repo-list-update-commit; \
 	fi
