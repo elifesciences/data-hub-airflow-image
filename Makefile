@@ -36,11 +36,11 @@ update-repo-list: \
 	git-checkout-branch \
 	update-repo-list-only
 
-git-repo-list-update-commit: update-repo-list
+git-repo-list-update-commit:
 	echo "committing changes..."
 	git commit -m "Updated Ref of $(GIT_URL_TO_UPDATE) to $(NEW_GIT_URL_REF)" $(REPO_LIST_FILE)
 
-git-repo-list-commit-if-changed:
+git-repo-list-commit-if-changed: update-repo-list
 	@if [ -z "$$(git diff HEAD -- $(REPO_LIST_FILE))" ]; then \
 		echo "nothing to commit, working tree clean"; \
 	else \
