@@ -42,7 +42,7 @@ git-repo-list-update-commit:
 
 git-repo-list-commit-if-changed: update-repo-list
 	@if [ -z "$$(git diff HEAD -- $(REPO_LIST_FILE))" ]; then \
-		echo "nothing to commit, working tree clean"; \
+		@echo "nothing to commit, working tree clean"; \
 	else \
 		$(MAKE) git-repo-list-update-commit; \
 	fi
