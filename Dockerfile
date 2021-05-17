@@ -1,4 +1,4 @@
-FROM apache/airflow:1.10.14-python3.6
+FROM apache/airflow:1.10.15-python3.7
 ARG GIT_REPO_DIR
 
 USER root
