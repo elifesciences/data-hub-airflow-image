@@ -1,22 +1,23 @@
 [
   {
     "git_repo_url": "git@github.com:elifesciences/data-hub-core-airflow-dags.git",
-    "reference": "a6a8a3edf8c59cff2f615dfa92545803c19cb6a0",
+    "reference": "312ca618aee3908105fc527bd05cc7613e259017",
     "clone_directory": "core_dag"
   },
   {
     "git_repo_url": "git@github.com:elifesciences/peerscout-dags.git",
-    "reference": "6f7acf30b1bfe49a1a5c17472902f652a24b461f",
+    "reference": "3f9d610ebe444340695e36d5351471e4053e10a2",
     "clone_directory": "peerscout_dag"
   },
   {
     "git_repo_url": "git@github.com:elifesciences/data-hub-ejp-xml-pipeline.git",
-    "reference": "e1f0b85346b6f1e0e1cf5e9e9446397c2fcf9154",
+    "reference": "637ac31b2dbfb83eed954528b65ec55f0d6e4ad6",
     "clone_directory": "ejp_xml_dag"
   },
   {
     "git_repo_url": "git@github.com:elifesciences/data-science-dags.git",
-    "reference": "455eb44b66f04b673bb97475dfa731d1e96a7963",
+    "reference": "14520ae6567cb1f98b01ca071e760fa7c1b5833f",
     "clone_directory": "data_science_dags"
   }
 ]
+
