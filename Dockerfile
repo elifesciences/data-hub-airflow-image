@@ -3,6 +3,8 @@ ARG GIT_REPO_DIR
 
 USER root
 
+RUN sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 467B942D3A79BD29
+
 RUN apt-get update \
   && apt-get install pkg-config libicu-dev gcc g++ -yqq \
   && rm -rf /var/lib/apt/lists/*
