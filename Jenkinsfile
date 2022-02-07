@@ -3,8 +3,6 @@ elifePipeline {
     node('containers-jenkins-plugin') {
         def commit
         def image_repo = 'elifesciences/data-hub-with-dags'
-        def deployment_namespace = 'data-hub'
-        def deployment_formula_ci_pipeline = 'elife-data-hub-formula'
 
         stage 'Checkout', {
             checkout scm
