@@ -6,19 +6,6 @@ updates:
     interval: daily
   open-pull-requests-limit: 10
   ignore:
-  - dependency-name: dask[complete]
-    versions:
-    - 2021.1.1
-    - 2021.2.0
-    - 2021.3.0
-    - 2021.3.1
-    - 2021.4.0
-  - dependency-name: distributed
-    versions:
-    - 2021.1.1
-    - 2021.2.0
-    - 2021.3.1
-    - 2021.4.0
   - dependency-name: apache-airflow[google_auth]
     versions:
     - 2.0.0
