@@ -16,8 +16,6 @@ RUN  pip install --disable-pip-version-check -r ./requirements.build.txt --user
 
 COPY requirements.txt ./requirements.txt
 RUN  pip install --disable-pip-version-check -r ./requirements.txt --user
-COPY --chown=airflow:airflow scripts/worker.sh ./
-RUN chmod +x worker.sh
 
 COPY --chown=airflow:airflow scripts/install_dag_in_docker.sh ./
 COPY --chown=airflow:airflow ${GIT_REPO_DIR} ./${GIT_REPO_DIR}
