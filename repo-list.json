@@ -16,7 +16,7 @@
   },
   {
     "git_repo_url": "git@github.com:elifesciences/data-science-dags.git",
-    "reference": "ab3d5caf5f17b724415367a8f9d2e72d415c893a",
+    "reference": "b7b265cea20da2ef7b45ba9f4a93674ff8db477d",
     "clone_directory": "data_science_dags"
   }
 ]
