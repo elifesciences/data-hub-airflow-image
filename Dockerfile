@@ -22,6 +22,7 @@ COPY ${GIT_REPO_DIR} ./${GIT_REPO_DIR}
 
 COPY --chown=airflow:root scripts/install_dag_in_docker.sh ./
 RUN chmod +x ./install_dag_in_docker.sh
+RUN ./install_dag_in_docker.sh
 
 RUN mkdir -p $AIRFLOW_HOME/serve
 RUN ln -s $AIRFLOW_HOME/logs $AIRFLOW_HOME/serve/log
