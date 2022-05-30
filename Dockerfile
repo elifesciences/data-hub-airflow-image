@@ -20,7 +20,8 @@ RUN  pip install --disable-pip-version-check -r ./requirements.txt --user
 COPY scripts/install_dag_in_docker.sh ./
 COPY ${GIT_REPO_DIR} ./${GIT_REPO_DIR}
 
-RUN ./install_dag_in_docker.sh
+COPY --chown=airflow:root scripts/install_dag_in_docker.sh ./
+RUN chmod +x ./install_dag_in_docker.sh
 
 RUN mkdir -p $AIRFLOW_HOME/serve
 RUN ln -s $AIRFLOW_HOME/logs $AIRFLOW_HOME/serve/log
