@@ -6,7 +6,7 @@
   },
   {
     "git_repo_url": "git@github.com:elifesciences/peerscout-dags.git",
-    "reference": "549f73612889f0bc142ce03734ce7333aa063703",
+    "reference": "ce74ad43800436cc14a84141e5d211b623c7ed61",
     "clone_directory": "peerscout_dag"
   },
   {
