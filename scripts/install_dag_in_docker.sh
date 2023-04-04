@@ -6,6 +6,9 @@ DAGS_PATH=$AIRFLOW_HOME/dags
 REPOS_DIR=$AIRFLOW_HOME/git_repos
 APP_FILES_DIR=$AIRFLOW_HOME/auxiliary_data_pipeline_files
 
+# Reduce size of docker image
+export PIP_NO_CACHE_DIR=1
+
 if [ ! -d $DAGS_PATH ]; then
   mkdir -p $DAGS_PATH
 fi
