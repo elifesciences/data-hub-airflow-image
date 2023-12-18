@@ -1,7 +1,7 @@
 [
   {
     "git_repo_url": "git@github.com:elifesciences/data-hub-core-airflow-dags.git",
-    "reference": "b59bc416a00244b50f8c19149e994c5bb2bbcd45",
+    "reference": "e565f9fdbae5f508e19b1ec9f00b571fb62dd1f0",
     "clone_directory": "core_dag"
   },
   {
