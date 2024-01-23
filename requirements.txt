@@ -1,1 +1,1 @@
-apache-airflow[google_auth]==2.8.1
+apache-airflow[google_auth]==2.7.1
