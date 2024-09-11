@@ -5,11 +5,6 @@
     "clone_directory": "core_dag"
   },
   {
-    "git_repo_url": "git@github.com:elifesciences/peerscout-dags.git",
-    "reference": "bd7d64b743e98cc3d1d425b288dd8a27808e7be6",
-    "clone_directory": "peerscout_dag"
-  },
-  {
     "git_repo_url": "git@github.com:elifesciences/data-hub-ejp-xml-pipeline.git",
     "reference": "85c69ba5187eaf22f10e364a2930c81b65416340",
     "clone_directory": "ejp_xml_dag"
